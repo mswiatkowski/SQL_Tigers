@@ -10,31 +10,31 @@ GO
 
 
 CREATE TABLE Customers (
-	customerid NCHAR(5) NOT NULL UNIQUE,
-	companyname NVARCHAR(40),
-	contactname NVARCHAR(30),
-	contacttitle NVARCHAR(30),
-	City NVARCHAR(15),
-	region NVARCHAR(15),
-	postalcode NVARCHAR(10),
-	country NVARCHAR(15),
-	phone NVARCHAR(24),
-	fax NVARCHAR(24),
+	customerid NVARCHAR(5) NOT NULL UNIQUE,
+    companyname NVARCHAR(40),
+    contactname NVARCHAR(30),
+    contacttitle NVARCHAR(30),
+    city NVARCHAR(50),
+    region NVARCHAR(15) NULL,
+    postalcode NVARCHAR(10),
+    country NVARCHAR(15),
+    phone NVARCHAR(24),
+    fax NVARCHAR(24) NULL,
 	CONSTRAINT PK_Customers PRIMARY KEY (customerid)
 );
 
 CREATE TABLE Orders (
-    orderid NCHAR(5) NOT NULL UNIQUE,
-    customerid NCHAR(5) NOT NULL,
-    employeeid NCHAR(5) NOT NULL,
+	orderid INT NOT NULL UNIQUE,
+    customerid NVARCHAR(5),
+    employeeid INT,
     orderdate DATE,
     requireddate DATE,
     shippeddate DATE,
-    shipvia NCHAR(5),
-    freight REAL,
+    shipvia INT,
+    freight DECIMAL(10, 2),
     shipname NVARCHAR(40),
-    shipcity NVARCHAR(15),
-    shipregion NVARCHAR(15),
+    shipcity NVARCHAR(50),
+    shipregion NVARCHAR(15) NULL,
     shippostalcode NVARCHAR(10),
     shipcountry NVARCHAR(15),
 	CONSTRAINT PK_Orders PRIMARY KEY (orderid)
@@ -42,31 +42,27 @@ CREATE TABLE Orders (
 
 
 CREATE TABLE Employees (
-    employeeid NCHAR(5) NOT NULL UNIQUE,
+	employeeid INT NOT NULL UNIQUE,
     lastname NVARCHAR(20),
     firstname NVARCHAR(10),
     title NVARCHAR(30),
     titleofcourtesy NVARCHAR(25),
-    birthdate DATE,
+    birthdate NVARCHAR(20) NULL, -- by³ b³¹d przy imporcie jako date - nie potrafiê powiedzieæ dlaczego
     hiredate DATE,
     address NVARCHAR(70),
-    city NVARCHAR(15),
+    city NVARCHAR(50),
     region NVARCHAR(15),
     postalcode NVARCHAR(10),
     country NVARCHAR(15),
     homephone NVARCHAR(24),
-    extension NVARCHAR(4),
-    photo VARBINARY(MAX),
     notes NVARCHAR(MAX),
-    reportsto INT,
-    photopath NVARCHAR(255),
 	CONSTRAINT PK_Employees PRIMARY KEY (employeeid)
 );
 
 
 CREATE TABLE OrderDetails (
-    orderid NCHAR(5) NOT NULL,
-    productid NCHAR(5) NOT NULL,
+    orderid INT,
+    productid INT,
     unitprice MONEY,
     quantity SMALLINT,
     discount REAL
@@ -74,12 +70,12 @@ CREATE TABLE OrderDetails (
 
 
 CREATE TABLE Products (
-    productid NCHAR(5) NOT NULL UNIQUE,
-    productname NVARCHAR(50) NOT NULL,
-    supplierid NCHAR(5) NOT NULL,
-    categoryid NCHAR(5) NOT NULL,
-    quantityperunit NVARCHAR(20),
-    unitprice MONEY,
+	productid INT NOT NULL UNIQUE,
+    productname NVARCHAR(40),
+    supplierid INT,
+    categoryid INT,
+    quantityperunit NVARCHAR(25),
+    unitprice DECIMAL(10, 2),
     unitsinstock INT,
     unitsonorder INT,
     reorderlevel INT,
@@ -88,17 +84,16 @@ CREATE TABLE Products (
 );
 
 CREATE TABLE Shippers (
-	shipperid NCHAR(5) NOT NULL UNIQUE,
-	companyname NVARCHAR(40),
-	phone NVARCHAR (24),
+	shipperid INT NOT NULL UNIQUE,
+    companyname NVARCHAR(40),
+    phone NVARCHAR(24),
 	CONSTRAINT PK_Shippers PRIMARY KEY (shipperid)
 );
 
 CREATE TABLE Categories (
-	categoryid NCHAR(5) NOT NULL UNIQUE,
-	categoryname NVARCHAR(50),
-	description NTEXT,
-	picture NVARCHAR(255),
+	categoryid INT NOT NULL UNIQUE,
+    categoryname NVARCHAR(15),
+    description NVARCHAR(255),
 	CONSTRAINT PK_Categories PRIMARY KEY (categoryid)
 );
 
