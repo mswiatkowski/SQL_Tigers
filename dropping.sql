@@ -1,0 +1,10 @@
+USE master;
+GO
+
+ALTER DATABASE Northwind SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+GO
+
+DROP DATABASE Northwind;
+GO
+
+SELECT * FROM sys.databases WHERE name = 'Northwind';
