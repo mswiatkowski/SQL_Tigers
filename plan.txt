@@ -1,0 +1,21 @@
+PLAN SQL
+
+TODO:
+- baza danych
+- cel projektu
+- kod ma być działający
+- transformacje
+- ładowanie danych
+
+
+Musi zawierać:
+- konstrainty
+- widoki
+- narzędzie raportujace
+- diagram
+- opis relacji
+- screen połączenia narzędzia raportowego z bazą
+- procedury
+- widoki
+- min 2 tabele trg
+
